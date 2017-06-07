@@ -6,12 +6,10 @@ import App from 'pages/App'
 
 const context = {
 	insertCss: (...styles) => {
+		// eslint-disable-next-line no-underscore-dangle
 		const removeCss = styles.map(x => x._insertCss())
-
-		return () => {
-			removeCss.forEach(f => f())
-		}
-	}
+		return () => { removeCss.forEach(f => f()) }
+	},
 }
 
 const render = (Component, container) => {

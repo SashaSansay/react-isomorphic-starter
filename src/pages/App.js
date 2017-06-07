@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Switch, Route } from 'react-router'
 import Home from 'pages/Home'
@@ -10,7 +10,7 @@ const ContextType = {
 	insertCss: PropTypes.func.isRequired
 }
 
-class App extends PureComponent {
+class App extends Component {
 	static propTypes = {
 		context: PropTypes.shape(ContextType).isRequired,
 	}
