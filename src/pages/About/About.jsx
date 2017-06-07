@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import ListMiddledescAva from 'static/images/ListMiddleDescAva.jpg'
-import s from './About.css'
 import { Link } from 'react-router-dom'
+import withStyles from 'isomorphic-style-loader/lib/withStyles';
+import s from './About.css'
+import ListMiddledescAva from 'static/images/ListMiddleDescAva.jpg'
 
 class About extends PureComponent {
 	static propTypes = {}
@@ -18,4 +19,4 @@ class About extends PureComponent {
 	}
 }
 
-export default About
+export default withStyles(s)(About)

@@ -1,23 +1,32 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { AppContainer } from 'react-hot-loader'
 import App from 'pages/App'
 
-let container
+const context = {
+	insertCss: (...styles) => {
+		const removeCss = styles.map(x => x._insertCss())
 
-const render = (Component) => {
+		return () => {
+			removeCss.forEach(f => f())
+		}
+	}
+}
+
+const render = (Component, container) => {
 	ReactDOM.render(
-		<AppContainer>
-			<Component/>
-		</AppContainer>,
-		container)
+		<BrowserRouter>
+			<AppContainer>
+				<Component context={context}/>
+			</AppContainer>
+		</BrowserRouter>,
+		container
+	)
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	container = document.createElement('div')
-	document.getElementsByTagName('body')[0].appendChild(container)
-
-	render(App)
+	render(App, document.getElementById('ROOT_APP'))
 })
 
 if (module.hot) {

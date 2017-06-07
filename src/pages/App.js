@@ -1,21 +1,31 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
+import { Switch, Route } from 'react-router'
 import Home from 'pages/Home'
 import About from 'pages/About'
-import './App.css'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+
+const ContextType = {
+	// Enables critical path CSS rendering
+	// https://github.com/kriasoft/isomorphic-style-loader
+	insertCss: PropTypes.func.isRequired
+}
 
 class App extends PureComponent {
-	static propTypes = {}
-	static defaultProps = {}
+	static propTypes = {
+		context: PropTypes.shape(ContextType).isRequired,
+	}
+	static childContextTypes = ContextType
+
+	getChildContext () {
+		return this.props.context
+	}
 
 	render () {
 		return (
-			<Router>
-				<div>
+				<Switch>
 					<Route exact path="/" component={Home}/>
 					<Route exact path="/about" component={About}/>
-				</div>
-			</Router>
+				</Switch>
 		)
 	}
 }
